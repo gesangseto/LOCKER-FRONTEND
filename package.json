@@ -1,0 +1,36 @@
+{
+    "name": "Ultimate_Warehouse",
+    "version": "1.0.0",
+    "private": false,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "export": "next build && next export",
+        "lint": "next lint",
+        "format": "prettier --write \"**/**/*.{js,ts,tsx}\""
+    },
+    "dependencies": {
+        "axios": "^1.3.4",
+        "chart.js": "^4.2.1",
+        "crypto": "^1.0.1",
+        "moment": "^2.29.4",
+        "next": "12.3.1",
+        "nprogress": "^0.2.0",
+        "primeflex": "^3.3.0",
+        "primeicons": "^6.0.1",
+        "primereact": "^10.2.1",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-transition-group": "^4.4.5",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "@types/node": "18.15.11",
+        "eslint": "8.35.0",
+        "eslint-config-next": "13.2.4",
+        "prettier": "2.8.4",
+        "sass": "^1.58.3",
+        "typescript": "5.5.4"
+    }
+}
