@@ -5,10 +5,11 @@ const SelectOptionMultipleV2 = (props) => {
     const { error, required, title, float, defaultValue, options, onChange } = props;
     const [initialLoad, setInitialLoad] = useState(true);
     const [selectedData, setSelectedData] = useState([]);
+
     useEffect(() => {
         if (Array.isArray(options) && Array.isArray(defaultValue) && defaultValue.length > 0 && options.length > 0 && initialLoad) {
             setInitialLoad(false);
-            setSelectedData(convertToOption(defaultValue));
+            setSelectedData(defaultValue);
         }
     }, [options, defaultValue]);
 
@@ -32,7 +33,7 @@ const SelectOptionMultipleV2 = (props) => {
 
     useEffect(() => {
         if (onChange) {
-            onChange(selectedData.map((it) => it.id));
+            onChange(selectedData);
         }
     }, [selectedData]);
 
@@ -43,7 +44,7 @@ const SelectOptionMultipleV2 = (props) => {
                     {title || 'No Title'} <small className="p-error">{required ? '*' : ''}</small>
                 </label>
             ) : null}
-            <MultiSelect key={'id'} value={selectedData} onChange={(e) => setSelectedData(e.value)} options={options} optionLabel="label" placeholder="Select data" filter display="chip" itemTemplate={itemTemplate} />
+            <MultiSelect key={'value'} value={selectedData} onChange={(e) => setSelectedData(e.value)} options={options} optionLabel="label" placeholder="Select data" filter display="chip" itemTemplate={itemTemplate} />
 
             {/* <Dropdown
                 {...props}

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import FooterTemplate from 'src/component/FooterTemplate';
 import HeaderForm from 'src/component/HeaderForm';
 import TextInput from 'src/component/TextInput';
-import TextareaInput from 'src/component/TextareaInput';
 import { useToast } from 'src/component/ToastProvider';
 import { getLkrCustomer } from 'src/service/locker/master/customer';
 
