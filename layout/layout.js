@@ -105,14 +105,14 @@ const Layout = (props) => {
     return (
         <React.Fragment>
             <Head>
-                <title>Ultimate Warehouse</title>
+                <title>Smart Locker</title>
                 <meta charSet="UTF-8" />
                 <meta name="description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta name="robots" content="index, follow" />
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <meta property="og:type" content="website"></meta>
-                <meta property="og:title" content="Ultimate Warehouse"></meta>
-                <meta property="og:url" content="Ultimate Warehouse"></meta>
+                <meta property="og:title" content="Smart Locker"></meta>
+                <meta property="og:url" content="Smart Locker"></meta>
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 {/* <meta property="og:image" content="https://www.primefaces.org/static/social/sakai-nextjs.png"></meta> */}
                 <meta property="og:ttl" content="604800"></meta>

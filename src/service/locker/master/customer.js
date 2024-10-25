@@ -1,7 +1,7 @@
 import $axios from '../../api';
-let url = '/api/v1/warehouse/transaction/inbound';
+let url = '/api/v1/locker/customer';
 
-export const getWhTrxInbound = async (property) => {
+export const getLkrCustomer = async (property) => {
     var defaultParam = { ...property };
     var query_string = new URLSearchParams(defaultParam).toString();
     return new Promise((resolve) => {
@@ -16,3 +16,4 @@ export const getWhTrxInbound = async (property) => {
             });
     });
 };
+
