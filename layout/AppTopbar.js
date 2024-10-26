@@ -5,11 +5,10 @@ import { Avatar } from 'primereact/avatar';
 import { Menu } from 'primereact/menu';
 import { classNames } from 'primereact/utils';
 import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { destroyLoginSession, getProfile, getRoleMenu, updateProfile } from '../src/helper/storage';
+import { destroyLoginSession, getConfigApp, getProfile, updateProfile } from '../src/helper/storage';
+import { updateUser } from '../src/service/administrator/user';
 import ConfigTheme from './ConfigTheme';
 import { LayoutContext } from './context/layoutcontext';
-import { updateUser } from '../src/service/administrator/user';
-import { getConfigApp } from '../src/helper/storage';
 const templateAvatar = (props) => {
     const { name, email } = props;
     return (item, options) => {

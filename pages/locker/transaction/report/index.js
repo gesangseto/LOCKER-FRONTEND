@@ -7,6 +7,8 @@ import { getLkrTransaction } from 'src/service/locker/transaction/report';
 import { getLkrAccessColumn } from 'src/service/locker/master/access';
 import { getProfile } from 'src/helper/storage';
 import { humanizeText } from 'src/helper/utils';
+import ButtonLink from 'src/component/ButtonLink';
+
 
 const Report = () => {
     const showToast = useToast();
@@ -54,10 +56,24 @@ const Report = () => {
             // setFieldTable({ ...data });
         }
     }
+
+
+    const handlePrint = () => {
+        let param = { ...filter, fieldTable: JSON.stringify(fieldTable), export: true, export_type: 'xlsx' };
+        let _url = `${process.env.SERVER_API}/api/v1/locker/transaction?${new URLSearchParams(param).toString()}`;
+        window.open(`${_url}`, '_blank');
+        return true;
+    };
+
     return (
         <div className="card">
-            <HeaderIndex title="Api Message" />
+            <HeaderIndex title="Transaction Report" />
+
             <Table showGridlines data={resApi} filtering={filter} field={fieldTable} onChangeFilter={(item) => setFilter(item)} />
+
+            <div className={'mb-4 float-end'}>
+                <ButtonLink onClick={() => handlePrint()} type="print" />
+            </div>
         </div>
     );
 };

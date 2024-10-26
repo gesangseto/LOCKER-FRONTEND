@@ -27,7 +27,7 @@ const Index = () => {
 
     return (
         <div className="card">
-            <HeaderForm title="Customer" data={formData} onFinishApprove={() => getData(id)} />
+            <HeaderForm title="Transaction Report" data={formData} onFinishApprove={() => getData(id)} />
             <div className="grid p-fluid mt-5">
                 <div className="field col-12 md:col-6">
                     <TextInput title="Box" value={formData.box_number} />

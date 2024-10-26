@@ -26,6 +26,9 @@ const ButtonLink = (props) => {
         } else if (type === 'copy') {
             setIcon(`pi pi-copy p-button-text `);
             setDesign(`p-button-info p-button-text ${className}`);
+        } else if (type === 'print') {
+            setIcon(`pi pi-print p-button-text `);
+            setDesign(`p-button-success  ${className}`);
         } else {
             setIcon(`pi pi-question `);
             setDesign(`p-button-secondary ${className}`);
