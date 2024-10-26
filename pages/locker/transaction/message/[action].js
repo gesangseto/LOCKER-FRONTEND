@@ -31,7 +31,7 @@ const Index = () => {
             <HeaderForm title="Api Message" data={formData} onFinishApprove={() => getData(id)} />
             <div className="grid p-fluid mt-5">
                 <div className="field col-12 md:col-6">
-                    <TextInput title="Type" value={formData.type} />
+                    <TextInput title="Unique ID" value={formData.unique_id} />
                 </div>
                 <div className="field col-12 md:col-6">
                     <TextInput title="Sync" value={formData.sync} />
