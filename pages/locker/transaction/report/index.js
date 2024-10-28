@@ -46,13 +46,14 @@ const Report = () => {
         if (!id) { where.id = 'sa' }
         let res = await getLkrAccessColumn(where);
         if (res && res.data) {
-            let data = res.data[0].access_column
-            let field = []
-            for (const it of data) {
-                field.push({ key: it, label: humanizeText(it) })
+            if (res.data[0]) {
+                let data = res.data[0].access_column
+                let field = []
+                for (const it of data) {
+                    field.push({ key: it, label: humanizeText(it) })
+                }
+                setFieldTable(field)
             }
-            setFieldTable(field)
-
             // setFieldTable({ ...data });
         }
     }

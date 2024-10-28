@@ -31,17 +31,19 @@ const Index = () => {
     const getData = async (id) => {
         let res = await getConfAccessMenu({ id: id });
         if (res && res.data) {
-            let uniqueMenuModuleIds = new Set(); // Set kosong untuk menyimpan unique menu_module_id
-            let unik = [];
-            res.data[0].access_menu.forEach((item) => {
-                if (!uniqueMenuModuleIds.has(item.menu_module_id)) {
-                    uniqueMenuModuleIds.add(item.menu_module_id);
-                    unik.push(item);
-                }
-            });
-            let map = mappingToTreeFormat(res.data[0].access_menu);
-            setListModule(unik);
-            setFormData({ ...res.data[0] });
+            if (res.data[0]) {
+                let uniqueMenuModuleIds = new Set(); // Set kosong untuk menyimpan unique menu_module_id
+                let unik = [];
+                res.data[0].access_menu.forEach((item) => {
+                    if (!uniqueMenuModuleIds.has(item.menu_module_id)) {
+                        uniqueMenuModuleIds.add(item.menu_module_id);
+                        unik.push(item);
+                    }
+                });
+                let map = mappingToTreeFormat(res.data[0].access_menu);
+                setListModule(unik);
+                setFormData({ ...res.data[0] });
+            }
         }
     };
 
