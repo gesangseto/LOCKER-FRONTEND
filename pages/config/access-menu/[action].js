@@ -83,7 +83,9 @@ const Index = () => {
         }
     };
     const chekboxTemplate = (rowData, type) => {
-        return <React.Fragment>{(rowData[`can_${type}`] || type === 'all') && <Checkbox inputid="rememberme1" checked={rowData[type]} onChange={(e) => changeChecked(e.checked, rowData, type)} className="mr-2"></Checkbox>} </React.Fragment>;
+        console.log(rowData[type]);
+
+        return <React.Fragment>{(rowData[`can_${type}`] || type === 'all') && <Checkbox checked={rowData[type] ? true : false} onChange={(e) => changeChecked(e.checked, rowData, type)} className="mr-2"></Checkbox>} </React.Fragment>;
     };
 
     const changeChecked = (checked, data, type) => {
@@ -139,6 +141,7 @@ const Index = () => {
 
                     return (
                         <AccordionTab header={item.menu_module_name} key={index}>
+                            "TEST"
                             <DataTable selectionMode={'checkbox'} dataKey="id" value={module_menu} rowGroupMode="rowspan" groupRowsBy="parent_menu" sortMode="single" sortField="parent_menu" sortOrder={1} tableStyle={{ minWidth: '50rem' }}>
                                 <Column field="parent_menu" header="Parent" style={{ minWidth: '100px' }}></Column>
                                 <Column field="name" header="Name" style={{ minWidth: '100px' }}></Column>

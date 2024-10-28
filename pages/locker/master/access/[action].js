@@ -6,6 +6,7 @@ import TextInput from 'src/component/TextInput';
 import { useToast } from 'src/component/ToastProvider';
 import { capitalize } from 'src/helper/utils';
 import { getLkrAccessColumn, getLkrAttribute, updateLkrAccessColumn } from 'src/service/locker/master/access';
+import { humanizeText } from 'src/helper/utils';
 
 const Index = () => {
     const showToast = useToast();
@@ -32,7 +33,7 @@ const Index = () => {
     const getAttribute = async (id) => {
         let res = await getLkrAttribute({ id: id });
         if (res && res.data) {
-            let list = res.data.map(it => { return { id: it, value: it, label: it } })
+            let list = res.data.map(it => { return { id: it, value: it, label: humanizeText(it) } })
             setListAttribute(list);
         }
     };
