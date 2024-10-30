@@ -19,7 +19,7 @@ const AppFooter = () => {
         <div className="layout-footer">
             <img src={appConf.logo} alt="Logo" height="20" className="mr-2" />
             by
-            <span className="font-medium ml-2">SOMEONE</span>
+            <span className="font-medium ml-2">{appConf.name}</span>
         </div>
     );
 };

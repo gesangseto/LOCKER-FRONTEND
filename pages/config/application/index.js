@@ -94,6 +94,9 @@ const Index = () => {
                 <div className="field col-12 md:col-6">
                     <FileUploadDefault title="App Logo" src={formData.logo} onChange={(url) => setFormData({ ...formData, logo: url })} />
                 </div>
+                <div className="field col-12 md:col-6">
+                    <FileUploadDefault title="Home Logo" src={formData.logo_home} onChange={(url) => setFormData({ ...formData, logo_home: url })} />
+                </div>
 
 
             </div>

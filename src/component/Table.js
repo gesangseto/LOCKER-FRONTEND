@@ -17,7 +17,7 @@ import { classNames } from 'primereact/utils';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
 export default function Table(props) {
-    const { data, keyId, field, filtering, enableUpdate = false, onClickUpdate, onClickCopy, onClickWorkflow, onClickRead, onClickDelete, onChangeFilter, ...rest } = props;
+    const { data, keyId, field, filtering, coloringStatus, customAction, enableUpdate = false, disableDelete, onClickUpdate, onClickCopy, onClickWorkflow, onClickRead, onClickDelete, onChangeFilter, ...rest } = props;
     const router = useRouter();
 
     const [initialLoad, setInitialLoad] = useState(true);
@@ -183,6 +183,8 @@ export default function Table(props) {
     };
 
     const actionBodyTemplate = (rowData) => {
+        if (customAction)
+            return customAction(rowData)
         let key = keyId || 'id';
         let haveWorkflow = false;
         let can_update = true;
@@ -197,7 +199,7 @@ export default function Table(props) {
             <>
                 {canRead && (onClickRead ? <ButtonLink onClick={() => onClickRead(rowData)} type={'read'} /> : <ButtonLink href={`${router.asPath}read?id=${rowData[key]}`} type={'read'} />)}
                 {canUpdate && can_update && (onClickUpdate ? <ButtonLink onClick={() => onClickUpdate(rowData)} type={'update'} /> : <ButtonLink href={`${router.asPath}update?id=${rowData[key]}`} type={'update'} />)}
-                {canDelete && <ButtonLink type={'delete'} onClick={() => confirmDeleteProduct(rowData)} />}
+                {!disableDelete && canDelete && <ButtonLink type={'delete'} onClick={() => confirmDeleteProduct(rowData)} />}
                 {canWorkflow && haveWorkflow && <ButtonLink href={`${router.asPath}workflow?id=${rowData[key]}`} type={'workflow'} />}
                 {onClickCopy && <ButtonLink onClick={() => onClickCopy(rowData)} type={'copy'} />}
             </>
@@ -219,6 +221,9 @@ export default function Table(props) {
     const defaultBodyTemplate = (rowData, key) => {
         let val = rowData[key.field];
         let isBool = isBoolean(rowData[key.field]) || false;
+        if (key.field == 'status' && coloringStatus) {
+            return (<>{statusBodyTemplate(rowData)}</>)
+        }
         return <>{isBool ? <i className={classNames('pi', { 'text-green-500 pi-check-circle': val, 'text-red-500 pi-times-circle': !val })}></i> : <span>{val}</span>}</>;
     };
     const dateBodyTemplate = (rowData, key) => {
@@ -245,7 +250,14 @@ export default function Table(props) {
         } else {
             string = 'unqualified';
         }
-        return <span className={`customer-badge status-${string}`}>{rowData.status_name}</span>;
+        if (rowData.status == 'enable') {
+            string = 'qualified';
+        } else if (rowData.status == 'disable') {
+            string = 'negotiation';
+        } else if (rowData.status == 'broken') {
+            string = 'unqualified';
+        }
+        return <span className={`customer-badge status-${string}`}>{rowData.status_name || rowData.status}</span>;
     };
 
     const deleteDialogFooter = (
@@ -277,37 +289,37 @@ export default function Table(props) {
             >
                 {field
                     ? field.map((it) => {
-                          let typeData = 'text';
-                          let useFilter = true;
-                          if (it.hasOwnProperty('filter')) {
-                              useFilter = it.filter;
-                          }
-                          if (it.key.includes('date') || it.key.includes('created') || it.key.includes('updated')) {
-                              typeData = 'date';
-                          } else if (it.key == 'id' || it.key.endsWith('_id')) {
-                              typeData = 'numeric';
-                          }
-                          if (it.type) {
-                              typeData = it.type;
-                          }
-                          return (
-                              <Column
-                                  size="small"
-                                  field={it.key}
-                                  key={it.key}
-                                  header={it.label}
-                                  dataType={typeData}
-                                  style={{ flexGrow: 1, position: 'sticky' }}
-                                  body={typeData == 'date' ? dateBodyTemplate : defaultBodyTemplate}
-                                  headerStyle={{ minWidth: '5rem' }}
-                                  filter={useFilter}
-                                  autoLayout={true}
-                                  //   sortable
-                                  filterElement={typeData == 'date' ? dateFilterTemplate : typeData == 'numeric' ? numericFilterTemplate : typeData == 'boolean' ? booleanFilterTempalte : null}
-                                  filterPlaceholder={`Search by ${it.label}`}
-                              />
-                          );
-                      })
+                        let typeData = 'text';
+                        let useFilter = true;
+                        if (it.hasOwnProperty('filter')) {
+                            useFilter = it.filter;
+                        }
+                        if (it.key.includes('date') || it.key.includes('created') || it.key.includes('updated')) {
+                            typeData = 'date';
+                        } else if (it.key == 'id' || it.key.endsWith('_id')) {
+                            typeData = 'numeric';
+                        }
+                        if (it.type) {
+                            typeData = it.type;
+                        }
+                        return (
+                            <Column
+                                size="small"
+                                field={it.key}
+                                key={it.key}
+                                header={it.label}
+                                dataType={typeData}
+                                style={{ flexGrow: 1, position: 'sticky' }}
+                                body={typeData == 'date' ? dateBodyTemplate : defaultBodyTemplate}
+                                headerStyle={{ minWidth: '5rem' }}
+                                filter={useFilter}
+                                autoLayout={true}
+                                //   sortable
+                                filterElement={typeData == 'date' ? dateFilterTemplate : typeData == 'numeric' ? numericFilterTemplate : typeData == 'boolean' ? booleanFilterTempalte : null}
+                                filterPlaceholder={`Search by ${it.label}`}
+                            />
+                        );
+                    })
                     : tableData.length > 0 && Object.keys(tableData[0]).map((key) => <Column field={key} key={key} header={capitalize(key)} headerStyle={{ minWidth: '5rem' }}></Column>)}
 
                 <Column body={actionBodyTemplate} header="Action" headerStyle={{ minWidth: '11rem' }}></Column>
