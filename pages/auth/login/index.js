@@ -7,7 +7,7 @@ import { classNames } from 'primereact/utils';
 import React, { useContext, useEffect, useState } from 'react';
 import { useToast } from 'src/component/ToastProvider';
 import { error } from 'src/constant/message';
-import { setProfile } from 'src/helper/storage';
+import { setProfile, getRoleMenu } from 'src/helper/storage';
 import { login } from 'src/service/auth/application';
 import { LayoutContext } from '../../../layout/context/layoutcontext';
 import { getSessionError, setConfigApp, getConfigApp } from '../../../src/helper/storage';
@@ -45,7 +45,11 @@ const LoginPage = () => {
         if (send && !send.error) {
             setProfile(send.data[0]);
             showToast({ type: 'success', message: send.message });
-            router.push('/');
+            let menu = getRoleMenu()
+
+            let findAccessReport = menu.find(it => it.url == '/locker/transaction/report')
+            if (findAccessReport) { router.replace('/locker/transaction/report'); }
+            else { router.push('/'); }
             return;
         } else if (send && send.error) {
             return showToast({ type: 'error', message: send.message });
