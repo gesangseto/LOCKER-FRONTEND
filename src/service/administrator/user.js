@@ -43,6 +43,19 @@ export const updateUser = async (Params) => {
             });
     });
 };
+export const changePassword = async (Params) => {
+    return new Promise((resolve) => {
+        $axios
+            .post(`${url}/change-password`, Params)
+            .then((result) => {
+                let _data = result.data;
+                return resolve(_data);
+            })
+            .catch((e) => {
+                return resolve(false);
+            });
+    });
+};
 export const deleteUser = async (Params) => {
     let data = { data: { id: Params.id } };
 

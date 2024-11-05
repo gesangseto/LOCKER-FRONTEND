@@ -283,7 +283,7 @@ export default function Table(props) {
                 loading={loading}
                 filters={filters}
                 header={header}
-                autoLayout={true}
+                autolayout={"true"}
                 onFilter={(e) => handleChangeFilter({ search_options: e })}
                 {...rest}
             >
@@ -313,7 +313,7 @@ export default function Table(props) {
                                 body={typeData == 'date' ? dateBodyTemplate : defaultBodyTemplate}
                                 headerStyle={{ minWidth: '5rem' }}
                                 filter={useFilter}
-                                autoLayout={true}
+                                autolayout={true}
                                 //   sortable
                                 filterElement={typeData == 'date' ? dateFilterTemplate : typeData == 'numeric' ? numericFilterTemplate : typeData == 'boolean' ? booleanFilterTempalte : null}
                                 filterPlaceholder={`Search by ${it.label}`}

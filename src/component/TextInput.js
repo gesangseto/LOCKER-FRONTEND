@@ -3,7 +3,7 @@ import { Message } from 'primereact/message';
 import React from 'react';
 
 const TextInput = (props) => {
-    const { error, errorMessage, required, disabled, title, float, value, ...rest } = props;
+    const { error, errormessage, required, disabled, title, float, value, ...rest } = props;
 
     return (
         <span className={float ? 'p-float-label' : ''}>
@@ -13,7 +13,7 @@ const TextInput = (props) => {
                 </label>
             )}
             <InputText type="text" id={title} className={error ? 'p-inputtext-sm p-invalid' : ' p-inputtext-sm p-valid'} value={value || ''} error={error ? 'error' : null} disabled={disabled ? true : null} {...rest} />
-            <small className="p-error">{errorMessage ? errorMessage : null}</small>
+            <small className="p-error">{errormessage ? errormessage : null}</small>
 
             {float && (
                 <label htmlFor={title}>

@@ -20,7 +20,7 @@ const Message = () => {
 
     const fieldTable = [
         { key: 'id', label: 'ID' },
-        { key: 'type', label: 'Type' },
+        { key: 'unique_id', label: 'Unique ID' },
         { key: 'message', label: 'Message' },
         { key: 'sync', label: 'Sync' },
     ];

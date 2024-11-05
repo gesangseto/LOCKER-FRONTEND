@@ -95,6 +95,9 @@ const AppTopbar = forwardRef((props, ref) => {
         topbarmenu: topbarmenuRef.current,
         topbarmenubutton: topbarmenubuttonRef.current
     }));
+    const handleClickUser = () => {
+        router.push('/administrator/user/change-password');
+    }
 
     const handleUpdateLayoutConfig = async () => {
         let params = { layout_config: layoutConfig, id: profile.id, skip_metadata: true };
@@ -133,9 +136,9 @@ const AppTopbar = forwardRef((props, ref) => {
 
             <div ref={topbarmenuRef} className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}>
                 <i className={'p-link layout-topbar-button align-items-center'} onClick={(e) => menu.current.toggle(e)}>
-                    <Avatar image={'https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png'} className="mr-2" shape="circle" />
+                    <Avatar image={`${contextPath}/user.png`} className="mr-2" shape="circle" />
                 </i>
-                <Menu ref={menu} model={menuProfile} popup onClick={(e) => console.log(e)} />
+                <Menu ref={menu} model={menuProfile} popup onClick={(e) => handleClickUser(e)} />
             </div>
             <ConfigTheme visible={showConfig} onHide={() => setShowConfig(false)} icons={customIcons} />
         </div>
