@@ -141,7 +141,6 @@ const Index = () => {
 
                     return (
                         <AccordionTab header={item.menu_module_name} key={index}>
-                            "TEST"
                             <DataTable selectionMode={'checkbox'} dataKey="id" value={module_menu} rowGroupMode="rowspan" groupRowsBy="parent_menu" sortMode="single" sortField="parent_menu" sortOrder={1} tableStyle={{ minWidth: '50rem' }}>
                                 <Column field="parent_menu" header="Parent" style={{ minWidth: '100px' }}></Column>
                                 <Column field="name" header="Name" style={{ minWidth: '100px' }}></Column>

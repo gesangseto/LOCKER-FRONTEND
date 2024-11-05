@@ -69,8 +69,9 @@ const Report = () => {
     return (
         <div className="card">
             <HeaderIndex title="Transaction Report" />
-
-            <Table showGridlines data={resApi} filtering={filter} field={fieldTable} onChangeFilter={(item) => setFilter(item)} />
+            {fieldTable.length > 0 &&
+                <Table showGridlines data={resApi} filtering={filter} field={fieldTable} onChangeFilter={(item) => setFilter(item)} />
+            }
 
             <div className={'mb-4 float-end'}>
                 <ButtonLink onClick={() => handlePrint()} type="print" />

@@ -58,6 +58,7 @@ export default function Table(props) {
         }
     }, [data]);
 
+
     useEffect(() => {
         let fil = { ...filter, ...filtering };
         if (filtering.hasOwnProperty('total') && filtering.hasOwnProperty('grand_total')) {
@@ -136,7 +137,6 @@ export default function Table(props) {
         setDeleteDialog(false);
         if (onClickDelete) onClickDelete(selectedData);
     };
-
     const clearFilter = () => {
         let _resetFilter = initFilters();
         handleChangeFilter(_resetFilter);
@@ -230,11 +230,13 @@ export default function Table(props) {
         const format = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
         const isValidDateTime = moment(rowData[key.field], format).isValid();
         let val = rowData[key.field];
-        return new Date(val).toLocaleDateString('en-US', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
+        if (isValidDateTime) {
+            return new Date(val).toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        } else { return val; }
         // if (isValidDateTime) {
         //     val = moment(val).format('YYYY-MM-DD');
         // }
